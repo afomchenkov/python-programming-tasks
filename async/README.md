@@ -54,3 +54,31 @@ async def custom_coro():
 asyncio.run(main())
 ```
 
+## When to use asyncio
+
+- non-blocking I/O with subprocesses or socket connections
+- the benefit of coroutines outweighs the benefits of threads and processes
+- the async programming paradigm is preferred or required
+
+Asyncio is specifically designed for non-blocking I/O with subprocesses and TCP
+socket connections.
+If an app requires a large number of concurrent socket or subprocess tasks, then
+asyncio is an obvious choice.
+
+- executing and checking the results of many commands on a system
+- making and managing many socket connections
+- serving access to many client socket connections
+
+
+
+## Examples of TCP-based database protocols
+
+```txt
+| Database             | Protocol          | Default Port | TCP-based |
+| -------------------- | ----------------- | ------------ | --------- |
+| PostgreSQL           | PostgreSQL binary | 5432         | ✅ Yes     |
+| MySQL                | MySQL protocol    | 3306         | ✅ Yes     |
+| MongoDB              | MongoDB Wire      | 27017        | ✅ Yes     |
+| Redis                | RESP              | 6379         | ✅ Yes     |
+| Microsoft SQL Server | TDS               | 1433         | ✅ Yes     |
+```
