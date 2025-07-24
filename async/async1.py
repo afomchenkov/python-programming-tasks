@@ -7,7 +7,11 @@ def custom_routine():
 
 
 # define a coroutine function
-async def custom_coroutine():
+async def custom_coroutine(subroutine=None):
+    if subroutine:
+        print("Running subroutine...")
+        await subroutine
+
     await asyncio.sleep(1)
     message = "Custom Coroutine Result"
     print(message)
@@ -15,6 +19,8 @@ async def custom_coroutine():
 
 
 if __name__ == "__main__":
+    print("[Start execution]")
+
     custom_routine()
 
     # create a coroutine object
@@ -25,5 +31,8 @@ if __name__ == "__main__":
     # coro.close()  # Close the coroutine
     # asyncio.run(coro)
 
-    # Run the custom routine
-    asyncio.run(custom_coroutine())
+    # Run the custom routine in event loop
+    # The event loop manages the cooperative multitasking between coroutines
+    asyncio.run(custom_coroutine(coro))
+
+    print("[End execution]")
