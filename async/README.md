@@ -28,3 +28,29 @@ and allow another coroutine to run.
 Python provides Executor-based thread pools and process pools in the ThreadPoolExecutor
 and ProcessPoolExecutor classes.
 
+
+## asyncio
+
+Python provides coroutines as first-class objects and the asyncio module
+supports asynchronous programming.
+
+The module provides utility functions and classes to assist in creating
+and managing asynchronous tasks and performing non-blocking I/O with
+sockets and subprocesses. It provides the event loop required to execute
+coroutines.
+
+```python
+# define coroutine function
+import asyncio
+
+async def custom_coro():
+    # await another coroutine
+    await another_coro()
+
+# calling a coroutine function will return a coroutine object
+# which is an instance of coroutine class
+
+# start an asyncio program
+asyncio.run(main())
+```
+
