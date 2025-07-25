@@ -31,9 +31,10 @@ async def main():
         - `task.result()` retrieves the result of the task if it has completed successfully.
         - `task.exception()` retrieves any exception raised by the task.
         - `task.add_done_callback(callback)` allows you to register a callback that will be called
+        - `task.remove_done_callback(callback)` removes a previously registered callback.
           when the task is done, passing the task as an argument to the callback.
     """
-    task = asyncio.create_task(task_coroutine())
+    task = asyncio.create_task(task_coroutine(), name="MyTask")
     print("Task created, running concurrently with main coroutine")
     await asyncio.sleep(1)
     print("Main coroutine is still running")
