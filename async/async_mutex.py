@@ -32,7 +32,7 @@ async def task(lock, num, value):
 
 
 async def main():
-    lock = asyncio.Lock()
+    lock = asyncio.Lock() # create a shared lock
     tasks = [task(lock, i, random()) for i in range(5)]
     await asyncio.gather(*tasks)
     print("All tasks completed")

@@ -7,10 +7,13 @@ on the interanl counter.
 This limit will match the number of concurrent coroutines that can
 hold the semaphore at the same time.
 
+In a nutshell, a semaphore is a synchronization primitive that allows a limited number
+of coroutines to access a shared resource concurrently.
+
 - each time a coroutine acquires the semaphore, the internal counter is decremented
 - each time a coroutine releases the semaphore, the internal counter is incremented
 - if the internal counter reaches zero, any coroutine that tries to acquire the semaphore
-  will be block until another coroutine releases the semaphore
+  will be blocked until another coroutine releases the semaphore
 - if the internal counter is greater than zero, the coroutine will acquire the semaphore
 - the semaphore can be used to limit the number of concurrent tasks that can run at the same
   time, which is useful for controlling resource usage or preventing overloading of external
