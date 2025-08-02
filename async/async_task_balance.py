@@ -4,44 +4,40 @@ import random
 balance = 0
 
 
-async def add():
+async def add(lock):
     global balance
-    for _ in range(10000):
-        tmp = balance
-        await asyncio.sleep(random.uniform(0, 0.001))
-        tmp = tmp + 1
-        await asyncio.sleep(random.uniform(0, 0.001))
-        balance = tmp
+    async with lock:
+        for _ in range(1000):
+            tmp = balance
+            await asyncio.sleep(random.uniform(0, 0.0001))
+            tmp += 1
+            await asyncio.sleep(random.uniform(0, 0.0001))
+            balance = tmp
 
-async def subtract():
+
+async def subtract(lock):
     global balance
-    for _ in range(10000):
-        tmp = balance
-        await asyncio.sleep(random.uniform(0, 0.001))
-        tmp = tmp - 1
-        await asyncio.sleep(random.uniform(0, 0.001))
-        balance = tmp
-        
+    async with lock:
+        for _ in range(1000):
+            tmp = balance
+            await asyncio.sleep(random.uniform(0, 0.0001))
+            tmp -= 1
+            await asyncio.sleep(random.uniform(0, 0.0001))
+            balance = tmp
 
-# async def add():
-#     global balance
-#     for _ in range(10000):
-#         async with lock:
-#             tmp = balance
-#             await asyncio.sleep(0)
-#             tmp += 1
-#             await asyncio.sleep(0)
-#             balance = tmp
 
 async def main():
-    
-    tasks = [add() for _ in range(2)] + [subtract() for _ in range(2)]
-    random.shuffle(tasks)  # prevent grouping
+    global balance
+    balance = 0
+    lock = asyncio.Lock()
+    tasks = [add(lock) for _ in range(3)] + [subtract(lock) for _ in range(3)]
+    random.shuffle(tasks)
     await asyncio.gather(*tasks)
-
     print(f"Final balance: {balance}")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
-    print("Main: Done")
+    for i in range(5):
+        print(f"Run {i + 1}:")
+        asyncio.run(main())
+
