@@ -82,3 +82,10 @@ asyncio is an obvious choice.
 | Redis                | RESP              | 6379         | ✅ Yes     |
 | Microsoft SQL Server | TDS               | 1433         | ✅ Yes     |
 ```
+
+```txt
+queue.Queue + run_in_executor	Threads → asyncio	✅
+asyncio.Queue + run_coroutine_threadsafe	asyncio → threads	✅
+threading.Lock	Shared memory protection	✅
+asyncio.run_in_executor	Run sync/blocking code in thread	✅
+```
